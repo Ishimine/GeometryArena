@@ -30,17 +30,17 @@ public class Slider_UI : MonoBehaviour {
     void SetTarget()
     {
         //PlayerSwipeMovement.instance.ActVida += Actualizar;
-        FindObjectOfType<PlayerSwipeMovement>().ActVida += Actualizar;
+        if (FindObjectOfType<PlayerSwipeMovement>()) FindObjectOfType<PlayerSwipeMovement>().ActVida += Actualizar;
     }
 
     public void Actualizar(float act, float max)
     {
-        slider.value = act / max;
+       if(slider != null) slider.value = act / max;
     }
 
     private void OnDestroy()
     {
-        FindObjectOfType<PlayerSwipeMovement>().ActVida -= Actualizar;
+        if(FindObjectOfType<PlayerSwipeMovement>())        FindObjectOfType<PlayerSwipeMovement>().ActVida -= Actualizar;
         // PlayerSwipeMovement.instance.ActVida -= Actualizar;
     }
 }

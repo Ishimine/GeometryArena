@@ -10,15 +10,14 @@ public class Misil_Tipo_A : Unidad
     Rigidbody2D rb;
 
    public bool activado = false;
-    public Transform target;
+
+
     public Transform puntoPropulsion;
-    public float smooth = .5f;
-    public float velocidadRotacion = 10f;
-    public float fPropulsion = 300f;
-    float vel;
 
 
-    new void Start()
+
+
+    new void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         target = FindObjectOfType<PlayerSwipeMovement>().transform;
@@ -34,27 +33,7 @@ public class Misil_Tipo_A : Unidad
     }
 
 
-    void MirarTarget()
-    {
-        Vector2 dir = target.transform.position - transform.position;
-        float anguloObjetivo = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;                                                    //Angulo de la rotacion
-                                                                                                                             //float anguloActual = 
-
-       transform.rotation = Quaternion.AngleAxis(Mathf.SmoothDampAngle(transform.rotation.eulerAngles.z, anguloObjetivo,ref vel, smooth, velocidadRotacion, Time.deltaTime),Vector3.forward);
-
-
-       /* Quaternion rotObjetivo = Quaternion.AngleAxis(anguloObjetivo, Vector3.forward);
-        transform.rotation = rotObjetivo;*/
-
-
-        //transform.rotation = Quaternion.AngleAxis(Mathf.SmoothDampAngle(transform.rotation.z,anguloObjetivo,ref vel, smooth, velocidadRotacion, Time.deltaTime),Vector3.forward);
-
-        // transform.rotation = Quaternion.AngleAxis(velocidadRotacion * Mathf.Sign(Quaternion.Angle(transform.rotation,rotObjetivo)), Vector3.forward);
-
-        //float difAngle = Quaternion.Angle(transform.rotation, rotObjetivo)
-
-
-    }
+    
 
     void Propulsion()
     {
@@ -66,5 +45,16 @@ public class Misil_Tipo_A : Unidad
     {
         Debug.Log("FxImpacto: " + gameObject.name);
         Destroy(gameObject);
+    }
+
+    public override void FxImpactoRealizado()
+    {
+        Destroy(this.gameObject);
+       // throw new NotImplementedException();
+    }
+
+    public override void FxImpactoRealizado(Vector3 impactPos)
+    {
+       // throw new NotImplementedException();
     }
 }

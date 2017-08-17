@@ -41,8 +41,9 @@ public class Parte : MonoBehaviour
                 break;
             case TipoParte.Ofensivo:
                 if (otherParte.tipo == TipoParte.Ofensivo)
+                {
                     AnimarChispaso();
-
+                }
                 else if ((otherParte.tipo == TipoParte.Jugador) || (otherParte.tipo == TipoParte.Debil))
                 {
                     Dañar(otherParte, other);
@@ -58,11 +59,12 @@ public class Parte : MonoBehaviour
                     Dañar(otherParte, other);
                     unidad.FxImpacto();
                 }
-
                 break;
             default:
                 break;
-        }     
+        }
+        unidad.FxImpactoRealizado();
+
     }
 
     void AnimarChispaso()

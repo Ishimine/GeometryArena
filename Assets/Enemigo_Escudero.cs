@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,6 @@ public class Enemigo_Escudero : Unidad   {
     public float tMaximo = 6;
     public bool usarReferencia;
     public GameObject referencia;
-    public GameObject target;
     public float rangoDeDispersion = 10;
     public float fEmbestida = 200;
     public float velGiro = 1;
@@ -51,7 +51,7 @@ public class Enemigo_Escudero : Unidad   {
         yield return new WaitForSeconds(2f);
 
         //target = PlayerSwipeMovement.instance.gameObject;
-        target = FindObjectOfType<PlayerSwipeMovement>().gameObject;
+        BuscarTarget();
         Preparar();
     }
 
@@ -70,7 +70,7 @@ public class Enemigo_Escudero : Unidad   {
 
         rb.drag = drag[1];
         StopAllCoroutines();
-        StartCoroutine(Esperar(Random.Range(tMinimo, tMaximo)));
+        StartCoroutine(Esperar(UnityEngine.Random.Range(tMinimo, tMaximo)));
 
     }
 
@@ -79,7 +79,7 @@ public class Enemigo_Escudero : Unidad   {
 
         Vector2 dir = target.transform.position - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;                                                    //Angulo de la rotacion
-        Quaternion rotObjetivo = Quaternion.AngleAxis(angle + Random.Range(-rangoDeDispersion, rangoDeDispersion), Vector3.forward);
+        Quaternion rotObjetivo = Quaternion.AngleAxis(angle + UnityEngine.Random.Range(-rangoDeDispersion, rangoDeDispersion), Vector3.forward);
         Quaternion rotOriginal = transform.rotation;
         float t = 0;
         if (usarReferencia) referencia.SetActive(true);
@@ -181,4 +181,16 @@ public class Enemigo_Escudero : Unidad   {
     {
      
     }
+
+    public override void FxImpactoRealizado()
+    {
+      //  throw new NotImplementedException();
+    }
+
+    public override void FxImpactoRealizado(Vector3 impactPos)
+    {
+     //   throw new NotImplementedException();
+    }
+
+  
 }

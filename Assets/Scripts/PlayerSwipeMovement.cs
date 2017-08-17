@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -164,5 +165,15 @@ public class PlayerSwipeMovement : Unidad {
     public override void FxImpacto()
     {
         shakeCam.ActivarShakeNormal(ShakeControl.FuerzaShake.Debil);
+    }
+
+    public override void FxImpactoRealizado()
+    {
+      //  throw new NotImplementedException();
+    }
+
+    public override void FxImpactoRealizado(Vector3 impactPos)
+    {
+        //throw new NotImplementedException();
     }
 }

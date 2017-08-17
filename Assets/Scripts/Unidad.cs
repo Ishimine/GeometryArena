@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Unidad : MonoBehaviour
 {
-
+    public Transform target;
     public bool dead = false;
     public bool invulnerable = false;
 
@@ -17,7 +17,7 @@ public abstract class Unidad : MonoBehaviour
 
     public float velRecargaEnergia;
     public float vidaAct;
-    public float vidaMax = 100;
+    public float vidaMax = 1;
 
     public float energiaAct;
     public float energiaMax = 100;
@@ -36,6 +36,18 @@ public abstract class Unidad : MonoBehaviour
 
     public GameObject popText;
 
+    public float smooth = .5f;
+    public float velocidadRotacion = 10f;
+    public float fPropulsion = 300f;
+    float vel;
+
+    public void MirarTarget()
+    {
+        Vector2 dir = target.transform.position - transform.position;
+        float anguloObjetivo = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;                                                    //Angulo de la rotacion
+                                                                                                                             //float anguloActual = 
+        transform.rotation = Quaternion.AngleAxis(Mathf.SmoothDampAngle(transform.rotation.eulerAngles.z, anguloObjetivo, ref vel, smooth, velocidadRotacion, Time.deltaTime), Vector3.forward);
+    }
 
     public virtual void Awake()
     {
@@ -117,11 +129,14 @@ public abstract class Unidad : MonoBehaviour
         StopAllCoroutines();
         //print(gameObject.name + "Unidad Muerta");
         StartCoroutine(AnimacionMuerte());
+        Destroy(this.gameObject, 5f);
     }
 
 
     public IEnumerator AnimacionMuerte()
     {
+        if (spriteEnergia == null)
+            yield break;
         float t = 0;
         Color cActual = spriteEnergia.color;
         while(t < 1)
@@ -135,7 +150,14 @@ public abstract class Unidad : MonoBehaviour
 
     }
 
+    public void BuscarTarget()
+    {
+        target = FindObjectOfType<PlayerSwipeMovement>().transform;
+    }
 
     public abstract void FxImpacto();
+
+    public abstract void FxImpactoRealizado();
+    public abstract void FxImpactoRealizado(Vector3 impactPos);
 
 }
