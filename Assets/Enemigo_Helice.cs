@@ -11,11 +11,13 @@ public class Enemigo_Helice : Unidad
     private new void Awake()
     {
         base.Awake();
-        if(target == null) BuscarTarget();
+        StartCoroutine(EsperaActivacion());
     }
 
 
-    
+   
+
+
 
     public override void FxImpacto()
     {

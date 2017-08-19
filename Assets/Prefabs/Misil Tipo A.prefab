@@ -149,8 +149,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052211417781798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.84117, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4637372871843606}
   - {fileID: 4552803199569178}
@@ -372,7 +372,7 @@ TrailRenderer:
   m_Time: 1.2
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.6
+    widthMultiplier: 0.4
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -480,10 +480,10 @@ MonoBehaviour:
   rb: {fileID: 50675303994857372}
   popText: {fileID: 0}
   smooth: 0.05
-  velocidadRotacion: 150
-  fPropulsion: 18
+  velocidadRotacion: 90
+  fPropulsion: 13
   TipoDeFuerza: 1
-  activado: 1
+  activado: 0
   puntoPropulsion: {fileID: 4971406054126934}
 --- !u!212 &212009591241966922
 SpriteRenderer:

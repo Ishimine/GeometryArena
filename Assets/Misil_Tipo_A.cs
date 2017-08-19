@@ -6,8 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Misil_Tipo_A : Unidad
 {
+
     public ForceMode2D TipoDeFuerza;
-    Rigidbody2D rb;
 
    public bool activado = false;
 
@@ -19,9 +19,25 @@ public class Misil_Tipo_A : Unidad
 
     new void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        target = FindObjectOfType<PlayerSwipeMovement>().transform;
+        rb = GetComponent<Rigidbody2D>();        
     }
+
+
+    public void PropulsionInicial(float f, float espera)
+    {
+        if(rb == null) rb = GetComponent<Rigidbody2D>();
+        activado = false;
+        BuscarTarget();
+        rb.AddRelativeForce(Vector3.right * f, ForceMode2D.Impulse);
+        StartCoroutine(EsperaDeActivacion(espera));
+    }
+
+    IEnumerator EsperaDeActivacion(float espera)
+    {
+        yield return new WaitForSeconds(espera);
+        activado = true;
+    }
+
 
     new void Update()
     {

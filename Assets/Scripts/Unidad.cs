@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Unidad : MonoBehaviour
 {
+
     public Transform target;
     public bool dead = false;
     public bool invulnerable = false;
@@ -150,13 +151,20 @@ public abstract class Unidad : MonoBehaviour
 
     }
 
+    public IEnumerator EsperaActivacion()
+    {
+        yield return new WaitForSeconds(1);
+        if (target == null) BuscarTarget();
+
+    }
+
+
     public void BuscarTarget()
     {
         target = FindObjectOfType<PlayerSwipeMovement>().transform;
     }
 
     public abstract void FxImpacto();
-
     public abstract void FxImpactoRealizado();
     public abstract void FxImpactoRealizado(Vector3 impactPos);
 
