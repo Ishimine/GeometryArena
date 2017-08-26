@@ -147,15 +147,18 @@ public abstract class Unidad : MonoBehaviour
             spriteEnergia.color = Color.Lerp(cActual, Color.black, t);
             yield return null;
         }
-
-
     }
 
     public IEnumerator EsperaActivacion()
     {
         yield return new WaitForSeconds(1);
         if (target == null) BuscarTarget();
+    }
 
+
+    public virtual void Activar()
+    {
+        BuscarTarget();
     }
 
 

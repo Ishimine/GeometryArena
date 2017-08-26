@@ -76,7 +76,17 @@ public class GameController : MonoBehaviour {
         clone.GetComponent<PlayerSwipeMovement>().ActVida += slider.Actualizar;
         if (SesionJuegoIniciada != null) SesionJuegoIniciada();
         enPausa = false;
-        
+        SpawnearEnemigos();
+    }
+
+
+    public void SpawnearEnemigos()
+    {
+        Compuerta[] compuertas = FindObjectsOfType<Compuerta>();
+        foreach (Compuerta c in compuertas)
+        {
+            c.CrearUnidad();
+        }
     }
 
 

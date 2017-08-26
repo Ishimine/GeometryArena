@@ -11,11 +11,14 @@ public class Enemigo_Helice : Unidad
     private new void Awake()
     {
         base.Awake();
-        StartCoroutine(EsperaActivacion());
     }
 
+    public override void Activar()
+    {
+        base.Activar();
+        BuscarTarget();
+    }
 
-   
 
 
 

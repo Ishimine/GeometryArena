@@ -35,7 +35,8 @@ public class Enemigo_Javalina : Unidad {
     new void Start()
     {
         base.Start();
-        StartCoroutine(EsperaInicial());
+        spriteEnergia.color = apagado;
+
         //Debug.Log("Javalina Lista");
     }
 
@@ -57,14 +58,19 @@ public class Enemigo_Javalina : Unidad {
         }
     }
 
+    public override void Activar()
+    {
+        base.Activar();
+        Preparar();
+    }
+
+
 
     void Preparar()
     {
-
         rb.drag = drag[1];
         StopAllCoroutines();
         StartCoroutine(Esperar(UnityEngine.Random.Range(tMinimo, tMaximo)));
-
     }
 
     IEnumerator Apuntar()

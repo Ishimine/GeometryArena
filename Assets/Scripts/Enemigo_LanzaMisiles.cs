@@ -24,8 +24,14 @@ public class Enemigo_LanzaMisiles : Unidad
     private new void Awake()
     {
         base.Awake();
-        StartCoroutine(EsperaActivacion());
     }
+
+    public override void Activar()
+    {
+        base.Activar();
+        BuscarTarget();
+    }
+
 
     void DispararMisiles()
     {

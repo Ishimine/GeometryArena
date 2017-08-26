@@ -20,14 +20,16 @@ public class PlayerSwipeMovement : Unidad {
     TouchControl tc;
     Collider2D col;
     
-    private void Awake()
-    {
-        
-    }
 
     new void Start ()
     {
         base.Start();
+        Activar();
+    }
+
+    public override void Activar()
+    {
+        base.Activar();
         shakeCam = FindObjectOfType<ShakeControl>();
         tc = FindObjectOfType<TouchControl>();
         rb = GetComponent<Rigidbody2D>();
@@ -37,8 +39,9 @@ public class PlayerSwipeMovement : Unidad {
         tc.touchOut += SoltarFreno;
         tc.touchOut += DesactivarReferencia;
         tc.DireccionEstacionaria += Mirar;
-        if (ActVida != null) ActVida(vidaAct,vidaMax);
+        if (ActVida != null) ActVida(vidaAct, vidaMax);
     }
+
 
     private void OnDestroy()
     {

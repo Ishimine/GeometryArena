@@ -13,19 +13,7 @@ public class ShakeTest : MonoBehaviour {
     {
         camShake = FindObjectOfType<CameraShake>();
     }
-
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Fuerte();
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            Debil();
-        }
-
-
-    }
+    
 
     public void Fuerte()
     {

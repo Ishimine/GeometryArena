@@ -30,7 +30,11 @@ public class Parte : MonoBehaviour
         if (unidad.dead || unidad.invulnerable) return;
 
         Parte otherParte = other.collider.gameObject.GetComponent<Parte>();
-        if (otherParte == null) return;
+        if (otherParte == null)
+        {
+             unidad.FxImpactoRealizado();
+            return;
+        }
         //Debug.Log("Other.collider.gameobject.name" + otherParte.name);
 
         switch (tipo)
