@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSwipeMovement : Unidad {
-
-   // public static PlayerSwipeMovement instance;
+public class PlayerSwipeMovement : Unidad
+{
+    
     public float multiplicadorGastoEnergia = 1;
     public GameObject referencia;
 
@@ -19,8 +19,8 @@ public class PlayerSwipeMovement : Unidad {
 
     TouchControl tc;
     Collider2D col;
-    
 
+    
     new void Start ()
     {
         base.Start();
@@ -43,13 +43,14 @@ public class PlayerSwipeMovement : Unidad {
     }
 
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
         tc.DireccionPotencia -= Impulsar;
         tc.touchEstacionario -= ActivarFreno;
         tc.touchOut -= SoltarFreno;
         tc.touchOut -= DesactivarReferencia;
         tc.DireccionEstacionaria -= Mirar;
+        SistemaAlerta.QuitarEnemigo(this.gameObject);
     }
 
     void ActualizarReferencia(float dist)
@@ -61,6 +62,11 @@ public class PlayerSwipeMovement : Unidad {
     void DesactivarReferencia()
     {
         referencia.SetActive(false);
+    }
+
+
+    public override void CalcularVida()
+    {
     }
 
     bool GastarEnergia(ref float cant)
@@ -82,11 +88,10 @@ public class PlayerSwipeMovement : Unidad {
         }
     }
 
-    public override void RecibirDaño(float dañoRecibido, Collision2D other)
+    public override void RecibirDaño()
     {
         if ((invulnerable) || (dead)) return;
-
-        base.RecibirDaño(dañoRecibido, other);
+        base.RecibirDaño();
         invulnerable = true;
         StartCoroutine(TiempoInvulnerable(1f));
         shakeCam.ActivarShakeNormal(ShakeControl.FuerzaShake.Medio);
@@ -161,6 +166,11 @@ public class PlayerSwipeMovement : Unidad {
     {
         base.Muerto();
         GameController.instance.GameOver();
+    }
+
+    public override void FixedUpdate()
+    {
+        
     }
 
 

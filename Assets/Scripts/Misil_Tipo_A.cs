@@ -8,8 +8,7 @@ public class Misil_Tipo_A : Unidad
 {
 
     public ForceMode2D TipoDeFuerza;
-
-   public bool activado = false;
+    
 
 
     public Transform puntoPropulsion;
@@ -21,7 +20,11 @@ public class Misil_Tipo_A : Unidad
     {
         rb = GetComponent<Rigidbody2D>();        
     }
+    
 
+    public override void Activar()
+    {
+    }
 
     public void PropulsionInicial(float f, float espera)
     {
@@ -30,6 +33,12 @@ public class Misil_Tipo_A : Unidad
         BuscarTarget();
         rb.AddRelativeForce(Vector3.right * f, ForceMode2D.Impulse);
         StartCoroutine(EsperaDeActivacion(espera));
+        SistemaAlerta.AgregarAmenaza(this.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        SistemaAlerta.QuitarAmenaza(this.gameObject);
     }
 
     IEnumerator EsperaDeActivacion(float espera)
@@ -39,11 +48,10 @@ public class Misil_Tipo_A : Unidad
     }
 
 
-    new void Update()
+    public override void FixedUpdate()
     {
         if (!activado || target == null)
             return;
-
         MirarTarget();
         Propulsion();
     }

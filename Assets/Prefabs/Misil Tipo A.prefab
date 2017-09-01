@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 4546822131286346}
   - component: {fileID: 212995443248295564}
   - component: {fileID: 60978216514904876}
-  - component: {fileID: 114898172324068068}
+  - component: {fileID: 114682018618056762}
   m_Layer: 0
   m_Name: Cabeza Flecha (1)
   m_TagString: Untagged
@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiempo: 0.2
---- !u!114 &114898172324068068
+--- !u!114 &114682018618056762
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -446,13 +446,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1802357889417636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfd8367d4077818429e9b6b9d148a4ce, type: 3}
+  m_Script: {fileID: 11500000, guid: f9ebc62360065a14185c97c042dc1c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sonido: {fileID: 0}
+  tipo: 0
+  render: {fileID: 212995443248295564}
+  colorOriginal: {r: 0.809, g: 0, b: 0, a: 1}
   unidad: {fileID: 114948643564170258}
-  tipo: 1
-  "da\xF1o": 0
-  fx: {fileID: 0}
+  col: {fileID: 60978216514904876}
+  "da\xF1o": 1
+  colorOriginal: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114948643564170258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -464,6 +468,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df731b68816c60249b4b1dfa2ade2c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activado: 0
+  posObj: {x: 0, y: 0}
+  sonido: {fileID: 0}
   target: {fileID: 0}
   dead: 0
   invulnerable: 0
@@ -475,15 +482,16 @@ MonoBehaviour:
   vidaMax: 0
   energiaAct: 0
   energiaMax: 100
-  partesDebiles: []
+  puntosDebiles: []
   spriteEnergia: {fileID: 212995443248295564}
   rb: {fileID: 50675303994857372}
   popText: {fileID: 0}
+  dir: {x: 0, y: 0, z: 0}
+  velMov: 20
   smooth: 0.05
   velocidadRotacion: 90
   fPropulsion: 13
   TipoDeFuerza: 1
-  activado: 0
   puntoPropulsion: {fileID: 4971406054126934}
 --- !u!212 &212009591241966922
 SpriteRenderer:

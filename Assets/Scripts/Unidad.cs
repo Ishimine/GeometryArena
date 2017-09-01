@@ -4,7 +4,9 @@ using UnityEngine;
 
 public abstract class Unidad : MonoBehaviour
 {
-
+    public bool activado;
+    public Vector2 posObj;
+    public AudioSource sonido;
     public Transform target;
     public bool dead = false;
     public bool invulnerable = false;
@@ -13,17 +15,15 @@ public abstract class Unidad : MonoBehaviour
     public float knockBackForce = 10;
 
     public bool usarVidaSimple = true;
-    
-
 
     public float velRecargaEnergia;
-    public float vidaAct;
-    public float vidaMax = 1;
+    public int vidaAct;
+    public int vidaMax = 1;
 
     public float energiaAct;
     public float energiaMax = 100;
 
-    public Parte[] partesDebiles;
+    public List<Parte_PuntoDebil> puntosDebiles = new List<Parte_PuntoDebil>();
 
     public SpriteRenderer spriteEnergia;
 
@@ -37,10 +37,28 @@ public abstract class Unidad : MonoBehaviour
 
     public GameObject popText;
 
+
+    public Vector3 dir;
+    public float velMov = 20;
     public float smooth = .5f;
     public float velocidadRotacion = 10f;
     public float fPropulsion = 300f;
     float vel;
+
+
+    Color colorOrig;
+    Color colormuerte;
+
+
+    public void AgregarPuntoDebil(Parte_PuntoDebil p)
+    {
+        puntosDebiles.Add(p);
+    }
+
+    public void QuitarPuntoDebil(Parte_PuntoDebil p)
+    {
+        puntosDebiles.Remove(p);
+    }
 
     public void MirarTarget()
     {
@@ -52,37 +70,44 @@ public abstract class Unidad : MonoBehaviour
 
     public virtual void Awake()
     {
-        if (usarVidaSimple)
-        {
-            vidaAct = partesDebiles.Length;
-            vidaMax = partesDebiles.Length;
-        }
+        InicializarUnidad();
     }
 
-
-    public void Start()
+    public void InicializarUnidad()
     {
-        for (int i = 0; i < partesDebiles.Length; i++)
+
+        /*if (spriteEnergia != null)
         {
-            partesDebiles[i].dañoRecibido += RecibirDaño;
-        }
+            colorOrig = spriteEnergia.color;
+            colormuerte = Color.red;
+        }*/
+        rb = GetComponent<Rigidbody2D>();
+        sonido = GetComponent<AudioSource>();
     }
 
+    public virtual void Start()
+    {
+        CalcularVida();
+    }
+
+    public virtual void CalcularVida()
+    {
+        vidaAct = puntosDebiles.Count;
+        vidaMax = vidaAct;
+    }
     
-
-    public virtual void RecibirDaño(float dañoRecibido, Collision2D other)
+    public void SetPosObjetivo(Vector3 posObj)
     {
-        if (dead || invulnerable) return;
+        this.posObj = posObj;
+    }
 
-        if (usarVidaSimple)
-        {
-            vidaAct--;
-        }
-        else
-        {
-            vidaAct -= dañoRecibido;
-            CrearTextoPop(other.contacts[0].point, dañoRecibido);
-        }
+    public virtual void RecibirDaño()
+    {
+        if (dead || invulnerable) return;        
+        vidaAct--;
+
+       // if (spriteEnergia != null) spriteEnergia.color = Color.Lerp(colorOrig, colormuerte, vidaAct / vidaMax);
+
 
         if (ActVida != null) ActVida(vidaAct, vidaMax);
         if (vidaAct <= 0) Muerto();
@@ -115,6 +140,28 @@ public abstract class Unidad : MonoBehaviour
         RecargaEnergia();
     }
 
+    public virtual void FixedUpdate()
+    {
+        if (!activado) return;
+
+        posObj = target.position;
+        CalcularDir();
+        MovPorRb();
+    }
+
+    public virtual void CalcularDir()
+    {
+       dir =  (posObj - (Vector2)transform.position).normalized;
+    }
+
+    public void MovPorRb()
+    {
+        rb.AddForce(dir * velMov, ForceMode2D.Force);
+    }
+
+   
+
+
     public void RecargaEnergia()
     {
         if (energiaAct == 100)      return;
@@ -127,10 +174,17 @@ public abstract class Unidad : MonoBehaviour
     public virtual void Muerto()
     {
         dead = true;
+        activado = false;
         StopAllCoroutines();
         //print(gameObject.name + "Unidad Muerta");
         StartCoroutine(AnimacionMuerte());
         Destroy(this.gameObject, 5f);
+
+    }
+
+    public virtual void OnDestroy()
+    {
+        SistemaAlerta.QuitarEnemigo(this.gameObject);
     }
 
 
@@ -143,7 +197,6 @@ public abstract class Unidad : MonoBehaviour
         while(t < 1)
         {
             t += Time.deltaTime * 0.5f;
-
             spriteEnergia.color = Color.Lerp(cActual, Color.black, t);
             yield return null;
         }
@@ -158,8 +211,14 @@ public abstract class Unidad : MonoBehaviour
 
     public virtual void Activar()
     {
+        activado = true;
         BuscarTarget();
+        SistemaAlerta.AgregarEnemigo(this.gameObject);
     }
+
+    
+
+    
 
 
     public void BuscarTarget()

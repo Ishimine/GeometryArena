@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 4068779967407010}
   - component: {fileID: 50593302030208134}
   - component: {fileID: 114620790807819804}
+  - component: {fileID: 82511225051651078}
   m_Layer: 9
   m_Name: Enemigo LanzaMisiles
   m_TagString: Untagged
@@ -69,9 +70,9 @@ GameObject:
   - component: {fileID: 4897828865978020}
   - component: {fileID: 212464986814191110}
   - component: {fileID: 61806396805765454}
-  - component: {fileID: 114308480379585138}
+  - component: {fileID: 114775688076555112}
   m_Layer: 0
-  m_Name: Blanca_64x128 (1)
+  m_Name: "Ca\xF1on_B"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,9 +87,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4776251385995922}
   - component: {fileID: 212108551225694606}
-  - component: {fileID: 114845286351054364}
-  - component: {fileID: 114775005712685042}
   - component: {fileID: 58424940850560776}
+  - component: {fileID: 114416519377192682}
   m_Layer: 9
   m_Name: AreaDebil
   m_TagString: Untagged
@@ -153,9 +153,9 @@ GameObject:
   - component: {fileID: 4014629268371926}
   - component: {fileID: 212855567597630078}
   - component: {fileID: 61971615059950504}
-  - component: {fileID: 114038678053317564}
+  - component: {fileID: 114102073843171154}
   m_Layer: 0
-  m_Name: Blanca_64x128
+  m_Name: "Ca\xF1on_A"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -458,7 +458,87 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 1.28}
   m_EdgeRadius: 0
---- !u!114 &114038678053317564
+--- !u!82 &82511225051651078
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371059500841840}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &114102073843171154
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -466,28 +546,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 1600701023425642}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfd8367d4077818429e9b6b9d148a4ce, type: 3}
+  m_Script: {fileID: 11500000, guid: ce0ccc01685b15040bc7577616b3bbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sonido: {fileID: 0}
+  tipo: 2
+  render: {fileID: 212855567597630078}
+  colorOriginal: {r: 0, g: 0, b: 0, a: 0}
   unidad: {fileID: 114620790807819804}
-  tipo: 0
-  "da\xF1o": 0
-  fx: {fileID: 0}
---- !u!114 &114308480379585138
+  col: {fileID: 61971615059950504}
+--- !u!114 &114416519377192682
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1428643002512892}
+  m_GameObject: {fileID: 1489718889157814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfd8367d4077818429e9b6b9d148a4ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 37f9cfe2fb935674c858326e259d2c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sonido: {fileID: 0}
+  tipo: 3
+  render: {fileID: 212108551225694606}
+  colorOriginal: {r: 1, g: 0.55714285, b: 0, a: 1}
   unidad: {fileID: 114620790807819804}
-  tipo: 0
-  "da\xF1o": 0
-  fx: {fileID: 0}
+  col: {fileID: 58424940850560776}
+  sfxImpactoNormal: {fileID: 0}
+  sfxImpactoLetal: {fileID: 0}
+  vidaAct: 2
+  vidaMax: 2
+  colorDestello: {r: 1, g: 1, b: 1, a: 1}
+  colorMuerte: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &114620790807819804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -499,6 +589,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d49536579285b44ba90188e643b924d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activado: 0
+  posObj: {x: 0, y: 0}
+  sonido: {fileID: 0}
   target: {fileID: 0}
   dead: 0
   invulnerable: 0
@@ -510,67 +603,44 @@ MonoBehaviour:
   vidaMax: 1
   energiaAct: 0
   energiaMax: 100
-  partesDebiles:
-  - {fileID: 114775005712685042}
+  puntosDebiles:
+  - {fileID: 114416519377192682}
   spriteEnergia: {fileID: 212108551225694606}
   rb: {fileID: 50593302030208134}
   popText: {fileID: 0}
+  dir: {x: 0, y: 0, z: 0}
+  velMov: 250
   smooth: 0.5
   velocidadRotacion: 180
   fPropulsion: 300
   limites: {x: 50, y: 50}
   marca: {fileID: 0}
-  area: 50
-  posObj: {x: 0, y: 0, z: 0}
   tActivacionMisiles: 0.55
   fuezaDisparo: 240
   proyectil: {fileID: 1052211417781798, guid: 71a294f66e6ff9d449e6fbe9897a98d9, type: 2}
   puntosDeDisparo:
   - {fileID: 4228055872881680}
   - {fileID: 4432022240988416}
+  radioDePeligro: 10
+  radioObjetivo: 15
   distMinEscape: 12
-  velMov: 4.5
---- !u!114 &114775005712685042
+--- !u!114 &114775688076555112
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1489718889157814}
+  m_GameObject: {fileID: 1428643002512892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfd8367d4077818429e9b6b9d148a4ce, type: 3}
+  m_Script: {fileID: 11500000, guid: ce0ccc01685b15040bc7577616b3bbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unidad: {fileID: 114620790807819804}
+  sonido: {fileID: 0}
   tipo: 2
-  "da\xF1o": 0
-  fx: {fileID: 114845286351054364}
---- !u!114 &114845286351054364
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1489718889157814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b25c9158db3401409a5a37153aa3db3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  render: {fileID: 212108551225694606}
-  anim: {fileID: 0}
-  destellar: 1
-  usarAnimator: 0
-  cambiarEscala: 1
-  UsarHijos: 0
-  aumentoEscala: 0.9
-  cDestello: {r: 1, g: 1, b: 1, a: 1}
-  original: {r: 1, g: 0.6365111, b: 0.17647058, a: 1}
-  "da\xF1ado": {r: 0.7, g: 0.5, b: 0.3, a: 1}
-  cActual: {r: 0, g: 0, b: 0, a: 0}
-  velT: 0.5
-  t: 0.1
-  escalaOriginal: {x: 0, y: 0, z: 0}
-  escalaMax: {x: 0, y: 0, z: 0}
+  render: {fileID: 212464986814191110}
+  colorOriginal: {r: 0, g: 0, b: 0, a: 0}
+  unidad: {fileID: 114620790807819804}
+  col: {fileID: 61806396805765454}
 --- !u!114 &114992690544070368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -582,10 +652,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd8367d4077818429e9b6b9d148a4ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unidad: {fileID: 114620790807819804}
+  sonido: {fileID: 0}
   tipo: 0
-  "da\xF1o": 0
-  fx: {fileID: 0}
+  render: {fileID: 0}
+  colorOriginal: {r: 0, g: 0, b: 0, a: 0}
+  unidad: {fileID: 114620790807819804}
+  col: {fileID: 0}
 --- !u!212 &212108551225694606
 SpriteRenderer:
   m_ObjectHideFlags: 1

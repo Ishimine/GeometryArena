@@ -4,92 +4,73 @@ using UnityEngine;
 
 public class Parte : MonoBehaviour
 {
-    public Unidad unidad;
+    public AudioSource sonido;
 
-    public enum TipoParte { Defensivo, Ofensivo, Debil, Jugador }
-    public TipoParte tipo;
+    public enum tipoParte {Ofensivo, Destructible, Indestructible, PuntoDebil}
+    public tipoParte tipo;
 
-    public float daño;
-    Collider2D col;
-    public delegate void Trigger(Collision2D col, Parte parte);
-    public Trigger dañoDado;
 
-    public delegate void TriggerDaño(float daño, Collision2D other);
-    public TriggerDaño dañoRecibido;
+    public SpriteRenderer render;
+    public Color colorOriginal;
+    [SerializeField] public Unidad unidad;
+    public Collider2D col;   
 
-    public FX_Impacto fx;
+
 
     private void Awake()
     {
-        col = GetComponent<Collider2D>();
-        fx = GetComponent<FX_Impacto>();
+        InicializarParte();
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public void ReproducirSonido(AudioClip fx)
     {
-        if (unidad.dead || unidad.invulnerable) return;
+        if (fx == null) return;
+        sonido.clip = fx;
+        sonido.Play();
+    }
 
-        Parte otherParte = other.collider.gameObject.GetComponent<Parte>();
-        if (otherParte == null)
+    public virtual void InicializarParte()
+    {
+        SpriteRenderer rend = GetComponent<SpriteRenderer>();
+        if (rend != null)
         {
-             unidad.FxImpactoRealizado();
+            render = rend;
+            colorOriginal = render.color;
+        }     col = GetComponent<Collider2D>();
+    }
+
+
+    private void Reset()
+    {
+        if (col == null) InicializarParte();
+        if (unidad == null) BuscarUnidadEnJerarquia();
+        if (unidad == null)
+            Debug.Log("ALERTA: componente unidad INEXISTENTE en la jerarquia");
+    }
+
+    public virtual void BuscarUnidadEnJerarquia()
+    {
+        if (unidad != null)
             return;
-        }
-        //Debug.Log("Other.collider.gameobject.name" + otherParte.name);
+        Transform x = transform;
+        unidad = GetComponent<Unidad>();
 
-        switch (tipo)
+        while ((unidad == null) && (x != null))
         {
-            case TipoParte.Defensivo:
-                if (otherParte.tipo == TipoParte.Ofensivo)
-                    AnimarChispaso();
-                break;
-            case TipoParte.Ofensivo:
-                if (otherParte.tipo == TipoParte.Ofensivo)
-                {
-                    AnimarChispaso();
-                }
-                else if ((otherParte.tipo == TipoParte.Jugador) || (otherParte.tipo == TipoParte.Debil))
-                {
-                    Dañar(otherParte, other);
-                }
-
-                break;
-            case TipoParte.Debil:
-
-                break;
-            case TipoParte.Jugador:
-                if (otherParte.tipo == TipoParte.Debil)
-                {
-                    Dañar(otherParte, other);
-                    unidad.FxImpacto();
-                }
-                break;
-            default:
-                break;
+            x = x.parent;
+            if(x != null)
+                unidad = x.GetComponent<Unidad>();
         }
-        unidad.FxImpactoRealizado();
-
+        if (unidad == null)
+            DestroyImmediate(this);
     }
 
-    void AnimarChispaso()
-    {
-       // Debug.Log("Chispaso Animacion Faltante");
-    }
 
-    void Dañar(Parte p, Collision2D other)
-    {
-        //print(p.name);
-        p.RecibirDaño(daño, other);
-    }
-
-    void RecibirDaño(float daño, Collision2D other)
+    public virtual void OnCollisionEnter2D(Collision2D other)
     {
         if (unidad.dead || unidad.invulnerable) return;
-        if (dañoRecibido != null) dañoRecibido(daño * other.relativeVelocity.sqrMagnitude / 1000, other);
-        if (fx != null) fx.DestelloMuerte();
+        unidad.FxImpactoRealizado();
     }
-
-
-
+    
 
 }

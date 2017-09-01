@@ -55,8 +55,7 @@ GameObject:
   - component: {fileID: 58364078654969544}
   - component: {fileID: 50422406710456752}
   - component: {fileID: 114550592210206858}
-  - component: {fileID: 114687313641576196}
-  - component: {fileID: 96700132836254498}
+  - component: {fileID: 114152142072263688}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -142,6 +141,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1881278284622254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4462332307145136}
+  - component: {fileID: 96236745610662364}
+  m_Layer: 8
+  m_Name: Trail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4096786134170094
 Transform:
   m_ObjectHideFlags: 1
@@ -212,6 +227,19 @@ Transform:
   m_Father: {fileID: 4686841866928644}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4462332307145136
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1881278284622254}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.484, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4686841866928644}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4686841866928644
 Transform:
   m_ObjectHideFlags: 1
@@ -219,11 +247,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1371186091853700}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.75, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4334553244109936}
   - {fileID: 4390638038443238}
+  - {fileID: 4462332307145136}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -288,13 +317,13 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!96 &96700132836254498
+--- !u!96 &96236745610662364
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1371186091853700}
+  m_GameObject: {fileID: 1881278284622254}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -321,18 +350,24 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.6
+  m_Time: 0.4
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.6
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
+        value: 0
         inSlope: -1.1430686
         outSlope: -1.1430686
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.12270182
+        value: 0.9787235
+        inSlope: -0.00000079668155
+        outSlope: -0.00000079668155
         tangentMode: 0
       - serializedVersion: 2
         time: 1
@@ -345,7 +380,7 @@ TrailRenderer:
       m_RotationOrder: 0
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.83448267, b: 1, a: 0.7411765}
+      key0: {r: 0, g: 1, b: 0.7103448, a: 0.7411765}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -378,6 +413,30 @@ TrailRenderer:
     textureMode: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
+--- !u!114 &114152142072263688
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371186091853700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53e1917c90e89445af6b92f81f8d6f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sonido: {fileID: 0}
+  tipo: 3
+  render: {fileID: 212850627751917202}
+  colorOriginal: {r: 0.31764707, g: 0.94509804, b: 1, a: 1}
+  unidad: {fileID: 114184664316317638}
+  col: {fileID: 58364078654969544}
+  sfxImpactoNormal: {fileID: 0}
+  sfxImpactoLetal: {fileID: 0}
+  vidaAct: 3
+  vidaMax: 3
+  colorDestello: {r: 1, g: 0.04411763, b: 0.04411763, a: 1}
+  colorMuerte: {r: 0, g: 0, b: 0, a: 1}
+  "da\xF1oActual": 1
 --- !u!114 &114184664316317638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -389,6 +448,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87463e7fdec50d4ab7de1553e5b5cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activado: 0
+  posObj: {x: 0, y: 0}
+  sonido: {fileID: 0}
   target: {fileID: 0}
   dead: 0
   invulnerable: 0
@@ -400,11 +462,13 @@ MonoBehaviour:
   vidaMax: 3
   energiaAct: 0
   energiaMax: 100
-  partesDebiles:
-  - {fileID: 114687313641576196}
+  puntosDebiles:
+  - {fileID: 114152142072263688}
   spriteEnergia: {fileID: 212850627751917202}
   rb: {fileID: 50422406710456752}
   popText: {fileID: 1475712262584646, guid: a91b9731dc95edc4c913c58a7776a38c, type: 2}
+  dir: {x: 0, y: 0, z: 0}
+  velMov: 20
   smooth: 0.5
   velocidadRotacion: 10
   fPropulsion: 300
@@ -439,21 +503,6 @@ MonoBehaviour:
   t: 0.2
   escalaOriginal: {x: 0, y: 0, z: 0}
   escalaMax: {x: 0, y: 0, z: 0}
---- !u!114 &114687313641576196
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1371186091853700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfd8367d4077818429e9b6b9d148a4ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unidad: {fileID: 114184664316317638}
-  tipo: 3
-  "da\xF1o": 50
-  fx: {fileID: 114550592210206858}
 --- !u!212 &212014381468077116
 SpriteRenderer:
   m_ObjectHideFlags: 1

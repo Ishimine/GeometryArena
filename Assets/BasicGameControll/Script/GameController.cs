@@ -22,6 +22,13 @@ public class GameController : MonoBehaviour {
 
     public GameObject player;
 
+    public static int puntaje;
+
+    public static void SumarPuntaje(int x)
+    {
+        puntaje += x;
+    }
+
 
     private void Awake()
     {
