@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
+ 
 
+    public enum modoDeJuego {Survival, Nivel};
+    public modoDeJuego modoActual;
 
     public Slider_UI slider;
     public CameraFollow camFollow;
@@ -38,7 +42,7 @@ public class GameController : MonoBehaviour {
             instance = this;
             // SceneManager.sceneLoaded += CargaTerminada;
             SelectorDeNiveles.instance.NivelCargado += CargaTerminada;
-            if(SceneManager.GetActiveScene().buildIndex >0)
+            if(SceneManager.GetActiveScene().buildIndex > 0)
             {
                 IniciarSesionDeJuego();
             }
@@ -66,6 +70,11 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    public static void SetModo(modoDeJuego x)
+    {
+        instance.modoActual = x;
+    }
+
     public void EnMenu()
     {
         enJuego = false;
@@ -83,9 +92,27 @@ public class GameController : MonoBehaviour {
         clone.GetComponent<PlayerSwipeMovement>().ActVida += slider.Actualizar;
         if (SesionJuegoIniciada != null) SesionJuegoIniciada();
         enPausa = false;
-        SpawnearEnemigos();
-    }
 
+        if(modoActual == modoDeJuego.Survival)
+        {
+            UI_InGame.instance.SetActive_UI_Normal(true);
+            ActivarCompuertas();
+        }
+        else
+        {
+            ActivarCompuertas();
+            UI_InGame.instance.SetActive_UI_Normal(false);
+        }
+    }
+    
+    public void ActivarCompuertas()
+    {
+        Compuerta[] compuertas = FindObjectsOfType<Compuerta>();
+        foreach (Compuerta c in compuertas)
+        {
+            c.ActivarCompuerta();
+        }
+    }
 
     public void SpawnearEnemigos()
     {

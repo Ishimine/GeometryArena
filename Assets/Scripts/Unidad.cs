@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Unidad : MonoBehaviour
 {
+    public int valorUnidad = 1;
     public bool activado;
     public Vector2 posObj;
     public AudioSource sonido;
@@ -49,6 +50,9 @@ public abstract class Unidad : MonoBehaviour
     Color colorOrig;
     Color colormuerte;
 
+
+    public delegate void trigger(Unidad u);
+    public trigger unidadMuerta;
 
     public void AgregarPuntoDebil(Parte_PuntoDebil p)
     {
@@ -180,6 +184,8 @@ public abstract class Unidad : MonoBehaviour
         StartCoroutine(AnimacionMuerte());
         Destroy(this.gameObject, 5f);
 
+        if (unidadMuerta != null) unidadMuerta(this);
+
     }
 
     public virtual void OnDestroy()
@@ -213,7 +219,9 @@ public abstract class Unidad : MonoBehaviour
     {
         activado = true;
         BuscarTarget();
+
         SistemaAlerta.AgregarEnemigo(this.gameObject);
+
     }
 
     

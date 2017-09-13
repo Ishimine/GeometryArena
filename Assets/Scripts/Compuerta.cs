@@ -11,22 +11,21 @@ public class Compuerta : MonoBehaviour {
     public GameObject contenedorUnidad;
     Vector2 inicial = new Vector2(0.6f, 0.6f);
 
-    public void SetCapa()
-    {
-
-    }
-
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            CrearUnidad();
-        }
+        
+    }
+
+
+    public virtual void ActivarCompuerta()
+    {
+        CrearUnidad();
     }
 
     public void CrearUnidad()
     {
-        GameObject clone = Instantiate(unidad, contenedorUnidad.transform);
+        GameObject clone = Instantiate(unidad, contenedorUnidad.transform) as GameObject;
+
         contenedorUnidad.transform.localScale = inicial;
         ultimaUnidadCreada = clone.GetComponent<Unidad>();
         AbrirPuerta();
@@ -49,8 +48,9 @@ public class Compuerta : MonoBehaviour {
             contenedorUnidad.transform.localScale = Vector2.Lerp(inicial, Vector2.one, t);
             yield return null;
         }
-        unidad.transform.SetParent(null);
+        contenedorUnidad.transform.DetachChildren();
         ActivarUnidad();
+        CerrarPuerta();
     }
 
     IEnumerator EsperarYActivar(float f, Unidad u)

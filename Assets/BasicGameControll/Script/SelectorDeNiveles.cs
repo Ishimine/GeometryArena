@@ -19,7 +19,10 @@ public class SelectorDeNiveles : MonoBehaviour{
     }
 
 
-
+    public static void CargarSurvival()
+    {
+        SceneManager.LoadScene("Survival");
+    }
 
     public static void CargarNivel(int n)
     {
